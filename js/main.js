@@ -1,20 +1,24 @@
 'use strict'
 
-const {createApp} = Vue;
+const { createApp } = Vue;
 
 createApp({
-    data(){
-        return{
-            message: ''
+    data() {
+        return {
+            message: [],
+            
         }
     },
-    beforeMount(){
+    beforeMount() {
+        for(let i = 0; i < 10; i++){
+        axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
+            .then((response) => {
+                
+                this.message.push(response.data.response) ;
+                console.log(this.message);
+            })
 
-    axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
-    .then((response) =>{
-        console.log(response.data);
-        this.message = response.data.response;
-    })
+        }
     }
 }).mount('#app');
 
